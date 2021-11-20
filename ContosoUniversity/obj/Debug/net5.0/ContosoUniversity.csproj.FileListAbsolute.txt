@@ -142,3 +142,8 @@
 /Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/obj/Debug/net5.0/ref/ContosoUniversity.dll
 /Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/obj/Debug/net5.0/ContosoUniversity.pdb
 /Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/obj/Debug/net5.0/ContosoUniversity.genruntimeconfig.cache
+/Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/obj/Debug/net5.0/Razor/Views/Students/Create.cshtml.g.cs
+/Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/obj/Debug/net5.0/Razor/Views/Students/Delete.cshtml.g.cs
+/Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/obj/Debug/net5.0/Razor/Views/Students/Details.cshtml.g.cs
+/Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/obj/Debug/net5.0/Razor/Views/Students/Edit.cshtml.g.cs
+/Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/obj/Debug/net5.0/Razor/Views/Students/Index.cshtml.g.cs
