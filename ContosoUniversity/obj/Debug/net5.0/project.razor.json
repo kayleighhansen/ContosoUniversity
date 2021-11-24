@@ -15654,6 +15654,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/Views/Home/About.cshtml",
+      "TargetPath": "Views\\Home\\About.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/Views/Students/Index.cshtml",
       "TargetPath": "Views\\Students\\Index.cshtml",
       "FileKind": "mvc"
