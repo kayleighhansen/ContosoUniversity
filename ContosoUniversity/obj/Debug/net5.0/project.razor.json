@@ -15624,6 +15624,26 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/Views/Instructors/Create.cshtml",
+      "TargetPath": "Views\\Instructors\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/Views/Instructors/Details.cshtml",
+      "TargetPath": "Views\\Instructors\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/Views/Instructors/Edit.cshtml",
+      "TargetPath": "Views\\Instructors\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/Views/Instructors/Index.cshtml",
+      "TargetPath": "Views\\Instructors\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/Views/Students/Create.cshtml",
       "TargetPath": "Views\\Students\\Create.cshtml",
       "FileKind": "mvc"
@@ -15691,6 +15711,11 @@
     {
       "FilePath": "/Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/Views/Students/Delete.cshtml",
       "TargetPath": "Views\\Students\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/kayleighhansen/Software/ContosoUniversity/ContosoUniversity/Views/Instructors/Delete.cshtml",
+      "TargetPath": "Views\\Instructors\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {

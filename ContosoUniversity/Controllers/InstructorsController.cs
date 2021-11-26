@@ -10,25 +10,22 @@ using ContosoUniversity.Models;
 
 namespace ContosoUniversity.Controllers
 {
-    public class CoursesController : Controller
+    public class InstructorsController : Controller
     {
         private readonly SchoolContext _context;
 
-        public CoursesController(SchoolContext context)
+        public InstructorsController(SchoolContext context)
         {
             _context = context;
         }
 
-        // GET: Courses
+        // GET: Instructors
         public async Task<IActionResult> Index()
         {
-            var courses = _context.Courses
-                .Include(c => c.Department)
-                .AsNoTracking();
-            return View(await courses.ToListAsync());
+            return View(await _context.Instructors.ToListAsync());
         }
 
-        // GET: Courses/Details/5
+        // GET: Instructors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,43 +33,39 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses
-                .Include(c => c.Department)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseID == id);
-            if (course == null)
+            var instructor = await _context.Instructors
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (instructor == null)
             {
                 return NotFound();
             }
 
-            return View(course);
+            return View(instructor);
         }
 
-        // GET: Courses/Create
+        // GET: Instructors/Create
         public IActionResult Create()
         {
-            PopulateDepartmentsDropDownList();
             return View();
         }
 
-        // POST: Courses/Create
+        // POST: Instructors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CourseID,Credits,DepartmentID,Title")] Course course)
+        public async Task<IActionResult> Create([Bind("ID,LastName,FirstMidName,HireDate")] Instructor instructor)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(course);
+                _context.Add(instructor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            PopulateDepartmentsDropDownList(course.DepartmentID);
-            return View(course);
+            return View(instructor);
         }
 
-        // GET: Courses/Edit/5
+        // GET: Instructors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,18 +73,18 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses
+            var instructor = await _context.Instructors
+                .Include(i => i.OfficeAssignment)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseID == id);
-            if (course == null)
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (instructor == null)
             {
                 return NotFound();
             }
-            PopulateDepartmentsDropDownList(course.DepartmentID);
-            return View(course);
+            return View(instructor);
         }
 
-        // POST: Courses/Edit/5
+        // POST: Instructors/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
@@ -103,13 +96,19 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var courseToUpdate = await _context.Courses
-                .FirstOrDefaultAsync(c => c.CourseID == id);
+            var instructorToUpdate = await _context.Instructors
+                .Include(i => i.OfficeAssignment)
+                .FirstOrDefaultAsync(s => s.ID == id);
 
-            if (await TryUpdateModelAsync<Course>(courseToUpdate,
+            if (await TryUpdateModelAsync<Instructor>(
+                instructorToUpdate,
                 "",
-                c => c.Credits, c => c.DepartmentID, c => c.Title))
+                i => i.FirstMidName, i => i.LastName, i => i.HireDate, i => i.OfficeAssignment))
             {
+                if (String.IsNullOrWhiteSpace(instructorToUpdate.OfficeAssignment?.Location))
+                {
+                    instructorToUpdate.OfficeAssignment = null;
+                }
                 try
                 {
                     await _context.SaveChangesAsync();
@@ -123,11 +122,10 @@ namespace ContosoUniversity.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            PopulateDepartmentsDropDownList(courseToUpdate.DepartmentID);
-            return View(courseToUpdate);
+            return View(instructorToUpdate);
         }
 
-        // GET: Courses/Delete/5
+        // GET: Instructors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,40 +133,30 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses
-                .Include(c => c.Department)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseID == id);
-            if (course == null)
+            var instructor = await _context.Instructors
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if (instructor == null)
             {
                 return NotFound();
             }
 
-            return View(course);
+            return View(instructor);
         }
 
-        private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
-        {
-            var departmentsQuery = from d in _context.Departments
-                                orderby d.Name
-                                select d;
-            ViewBag.DepartmentID = new SelectList(departmentsQuery.AsNoTracking(), "DepartmentID", "Name", selectedDepartment);
-        }
-
-        // POST: Courses/Delete/5
+        // POST: Instructors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var course = await _context.Courses.FindAsync(id);
-            _context.Courses.Remove(course);
+            var instructor = await _context.Instructors.FindAsync(id);
+            _context.Instructors.Remove(instructor);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CourseExists(int id)
+        private bool InstructorExists(int id)
         {
-            return _context.Courses.Any(e => e.CourseID == id);
+            return _context.Instructors.Any(e => e.ID == id);
         }
     }
 }
